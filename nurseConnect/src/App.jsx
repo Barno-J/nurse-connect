@@ -1,14 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
-
   return (
-    <>
-    <p className="text-2xl font-bold text-center mt-10 text-blue-600">
-      Welcome to Nurse Connect!
-    </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Signup />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
