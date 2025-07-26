@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useTheme } from '../contexts/ThemeContext';
 import Button from './ui/Button';
 import Modal from './ui/Modal';
 import { FiChevronDown, FiChevronUp, FiExternalLink, FiClock, FiMapPin, FiCalendar, FiBriefcase, FiAward, FiLayers } from 'react-icons/fi';
 
 const JobDescription = ({ job, onClose }) => {
-  const { isDark } = useTheme();
   const [activeSection, setActiveSection] = useState(null);
   const [isApplying, setIsApplying] = useState(false);
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
@@ -79,28 +77,28 @@ const JobDescription = ({ job, onClose }) => {
       content: (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-start">
-            <FiBriefcase className="mt-1 mr-2 flex-shrink-0" />
+            <FiBriefcase className="mt-1 mr-2 flex-shrink-0 icon-primary" />
             <div>
               <h3 className="font-medium">Job Type</h3>
               <p>{j.jobType}</p>
             </div>
           </div>
           <div className="flex items-start">
-            <FiAward className="mt-1 mr-2 flex-shrink-0" />
+            <FiAward className="mt-1 mr-2 flex-shrink-0 icon-primary" />
             <div>
               <h3 className="font-medium">Qualification</h3>
               <p>{j.qualification}</p>
             </div>
           </div>
           <div className="flex items-start">
-            <FiClock className="mt-1 mr-2 flex-shrink-0" />
+            <FiClock className="mt-1 mr-2 flex-shrink-0 icon-primary" />
             <div>
               <h3 className="font-medium">Experience</h3>
               <p>{j.experience}</p>
             </div>
           </div>
           <div className="flex items-start">
-            <FiMapPin className="mt-1 mr-2 flex-shrink-0" />
+            <FiMapPin className="mt-1 mr-2 flex-shrink-0 icon-primary" />
             <div>
               <h3 className="font-medium">Field</h3>
               <p>{j.field}</p>
@@ -108,7 +106,7 @@ const JobDescription = ({ job, onClose }) => {
           </div>
           {j.salary && (
             <div className="flex items-start">
-              <FiAward className="mt-1 mr-2 flex-shrink-0" />
+              <FiAward className="mt-1 mr-2 flex-shrink-0 icon-primary" />
               <div>
                 <h3 className="font-medium">Salary Range</h3>
                 <p>{j.salary}</p>
@@ -121,12 +119,12 @@ const JobDescription = ({ job, onClose }) => {
     {
       id: 'requirements',
       title: 'Requirements',
-      icon: <FiAward className="mr-2" />,
+      icon: <FiAward className="mr-2 icon-primary" />,
       content: (
         <ul className="space-y-2">
           {j.requirements.map((req, idx) => (
             <li key={idx} className="flex items-start">
-              <span className="inline-block h-2 w-2 rounded-full bg-blue-500 mt-2 mr-2"></span>
+              <span className="inline-block h-2 w-2 rounded-full bg-accent mt-2 mr-2"></span>
               <span className="text-base">{req}</span>
             </li>
           ))}
@@ -136,12 +134,12 @@ const JobDescription = ({ job, onClose }) => {
     {
       id: 'responsibilities',
       title: 'Responsibilities',
-      icon: <FiLayers className="mr-2" />,
+      icon: <FiLayers className="mr-2 icon-primary" />,
       content: (
         <ul className="space-y-2">
           {j.responsibilities.map((res, idx) => (
             <li key={idx} className="flex items-start">
-              <span className="inline-block h-2 w-2 rounded-full bg-green-500 mt-2 mr-2"></span>
+              <span className="inline-block h-2 w-2 rounded-full bg-accent mt-2 mr-2"></span>
               <span className="text-base">{res}</span>
             </li>
           ))}
@@ -151,13 +149,13 @@ const JobDescription = ({ job, onClose }) => {
     {
       id: 'skills',
       title: 'Skills',
-      icon: <FiAward className="mr-2" />,
+      icon: <FiAward className="mr-2 icon-primary" />,
       content: (
         <div className="flex flex-wrap gap-2">
           {j.skills.map((skill, idx) => (
             <span 
               key={idx}
-              className={`px-3 py-1 rounded-full text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`}
+              className="px-3 py-1 rounded-full text-sm bg-card-secondary"
             >
               {skill}
             </span>
@@ -168,12 +166,12 @@ const JobDescription = ({ job, onClose }) => {
     ...(j.benefits ? [{
       id: 'benefits',
       title: 'Benefits',
-      icon: <FiAward className="mr-2" />,
+      icon: <FiAward className="mr-2 icon-primary" />,
       content: (
         <ul className="space-y-2">
           {j.benefits.map((benefit, idx) => (
             <li key={idx} className="flex items-start">
-              <span className="inline-block h-2 w-2 rounded-full bg-purple-500 mt-2 mr-2"></span>
+              <span className="inline-block h-2 w-2 rounded-full bg-accent mt-2 mr-2"></span>
               <span className="text-base">{benefit}</span>
             </li>
           ))}
@@ -183,17 +181,17 @@ const JobDescription = ({ job, onClose }) => {
   ];
 
   return (
-    <div className={`min-h-screen px-4 py-8 transition-colors duration-200 ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+    <div className="min-h-screen px-4 py-8 bg-primary text-primary">
       <div className="max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="flex justify-between items-center mb-6">
           <button 
             onClick={onClose}
-            className={`flex items-center px-4 py-2 rounded-lg ${isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-100'} shadow-sm transition-colors`}
+            className="flex items-center px-4 py-2 rounded-lg bg-card hover:bg-card-secondary shadow-sm transition-colors"
           >
             ← Back to listings
           </button>
-          <span className={`px-3 py-1 rounded-full text-sm ${isDark ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800'}`}>
+          <span className="px-3 py-1 rounded-full text-sm bg-accent/20 text-accent">
             {j.jobType}
           </span>
         </div>
@@ -201,21 +199,21 @@ const JobDescription = ({ job, onClose }) => {
         {/* Job title and company */}
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl font-bold mb-1">{j.title}</h1>
-          <p className="text-lg text-blue-500">{j.company}</p>
+          <p className="text-lg text-accent">{j.company}</p>
         </div>
 
         {/* Meta information */}
-        <div className={`flex flex-wrap gap-4 mb-8 p-4 rounded-lg ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
+        <div className="flex flex-wrap gap-4 mb-8 p-4 rounded-lg bg-card shadow-sm">
           <div className="flex items-center">
-            <FiMapPin className="mr-2 text-blue-500" />
+            <FiMapPin className="mr-2 icon-primary" />
             <span>{j.location}</span>
           </div>
           <div className="flex items-center">
-            <FiCalendar className="mr-2 text-blue-500" />
+            <FiCalendar className="mr-2 icon-primary" />
             <span>Posted: {j.datePosted}</span>
           </div>
           <div className="flex items-center">
-            <FiClock className="mr-2 text-blue-500" />
+            <FiClock className="mr-2 icon-primary" />
             <span>Deadline: {j.deadline}</span>
           </div>
         </div>
@@ -225,11 +223,11 @@ const JobDescription = ({ job, onClose }) => {
           {sections.map((section) => (
             <div 
               key={section.id}
-              className={`rounded-lg overflow-hidden transition-all duration-200 ${isDark ? 'bg-gray-800' : 'bg-white'} shadow-sm`}
+              className="rounded-lg overflow-hidden transition-all duration-200 bg-card shadow-sm"
             >
               <button
                 onClick={() => toggleSection(section.id)}
-                className={`w-full flex justify-between items-center p-4 text-left ${isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-50'} transition-colors`}
+                className="w-full flex justify-between items-center p-4 text-left hover:bg-card-secondary transition-colors"
               >
                 <div className="flex items-center">
                   {section.icon}
@@ -245,7 +243,7 @@ const JobDescription = ({ job, onClose }) => {
         </div>
 
         {/* Fixed apply button */}
-        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent dark:from-gray-900 dark:to-transparent pt-8 pb-4 px-4">
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-card to-transparent pt-8 pb-4 px-4">
           <div className="max-w-4xl mx-auto flex justify-end">
             <Button
               onClick={handleApply}
@@ -258,7 +256,7 @@ const JobDescription = ({ job, onClose }) => {
 
         {/* Application Modal */}
         <Modal isOpen={isApplying} onClose={() => setIsApplying(false)}>
-          <div className={`p-6 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
+          <div className="p-6 bg-card">
             {applicationSubmitted ? (
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -267,7 +265,7 @@ const JobDescription = ({ job, onClose }) => {
                   </svg>
                 </div>
                 <h3 className="text-lg font-medium mb-2">Application Submitted!</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-secondary mb-4">
                   Thank you for applying to the {j.title} position at {j.company}.
                 </p>
                 <Button onClick={() => setApplicationSubmitted(false)} className="w-full">
@@ -282,7 +280,7 @@ const JobDescription = ({ job, onClose }) => {
                     <label className="block text-sm font-medium mb-1">Full Name</label>
                     <input 
                       type="text" 
-                      className={`w-full px-3 py-2 rounded border ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      className="w-full px-3 py-2 rounded border border-card-secondary bg-card"
                       placeholder="Your full name"
                     />
                   </div>
@@ -290,7 +288,7 @@ const JobDescription = ({ job, onClose }) => {
                     <label className="block text-sm font-medium mb-1">Email</label>
                     <input 
                       type="email" 
-                      className={`w-full px-3 py-2 rounded border ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      className="w-full px-3 py-2 rounded border border-card-secondary bg-card"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -298,7 +296,7 @@ const JobDescription = ({ job, onClose }) => {
                     <label className="block text-sm font-medium mb-1">Phone</label>
                     <input 
                       type="tel" 
-                      className={`w-full px-3 py-2 rounded border ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      className="w-full px-3 py-2 rounded border border-card-secondary bg-card"
                       placeholder="+254 700 000000"
                     />
                   </div>
@@ -306,16 +304,16 @@ const JobDescription = ({ job, onClose }) => {
                     <label className="block text-sm font-medium mb-1">Cover Letter</label>
                     <textarea 
                       rows="4"
-                      className={`w-full px-3 py-2 rounded border ${isDark ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-300'}`}
+                      className="w-full px-3 py-2 rounded border border-card-secondary bg-card"
                       placeholder="Tell us why you're a good fit for this position..."
                     ></textarea>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Resume/CV</label>
-                    <div className={`border-2 border-dashed rounded-lg p-4 text-center ${isDark ? 'border-gray-600' : 'border-gray-300'}`}>
+                    <div className="border-2 border-dashed rounded-lg p-4 text-center border-card-secondary">
                       <p className="text-sm">Drag and drop your file here, or click to browse</p>
                       <input type="file" className="hidden" id="resume-upload" />
-                      <label htmlFor="resume-upload" className="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
+                      <label htmlFor="resume-upload" className="inline-block mt-2 px-4 py-2 button-primary rounded cursor-pointer">
                         Select File
                       </label>
                     </div>
