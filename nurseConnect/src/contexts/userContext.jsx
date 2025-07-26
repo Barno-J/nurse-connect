@@ -1,39 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/slices/userSlice';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-	const [token, setToken] = useState(() => localStorage.getItem('token') || '');
-	const [user, setUser] = useState(() => {
-		const savedUser = localStorage.getItem('user');
-		return savedUser ? JSON.parse(savedUser) : null;
-	});
+	const dispatch = useDispatch();
+	const { user, token } = useSelector((state) => state.user);
 
-	useEffect(() => {
-		if (token) {
-			localStorage.setItem('token', token);
-		} else {
-			localStorage.removeItem('token');
-		}
-	}, [token]);
-
-	useEffect(() => {
-		if (user) {
-			localStorage.setItem('user', JSON.stringify(user));
-		} else {
-			localStorage.removeItem('user');
-		}
-	}, [user]);
-
-	const logout = () => {
-		setToken('');
-		setUser(null);
-		localStorage.removeItem('token');
-		localStorage.removeItem('user');
+	const handleLogout = () => {
+		dispatch(logout());
 	};
 
 	return (
-		<UserContext.Provider value={{ token, user, setToken, setUser, logout }}>
+		<UserContext.Provider value={{ token, user, logout: handleLogout }}>
 			{children}
 		</UserContext.Provider>
 	);
