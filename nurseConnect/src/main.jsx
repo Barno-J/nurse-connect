@@ -6,14 +6,17 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ThemeProvider } from './contexts/ThemeContext';
 import { UserProvider } from './contexts/userContext';
+import { ToastProvider } from './contexts/ToastContext';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <UserProvider>
-        <ThemeProvider>
-          <App />
-        </ThemeProvider>
+        <ToastProvider>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+        </ToastProvider>
       </UserProvider>
     </Provider>
   </StrictMode>
