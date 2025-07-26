@@ -1,7 +1,6 @@
 import React from 'react';
 import Profile from '../Profile';
 import Button from './Button';
-import { useTheme } from '../../contexts/ThemeContext';
 
 const Header = ({
   title = 'NurseConnect',
@@ -9,13 +8,10 @@ const Header = ({
   onSettings,
   onLogout,
 }) => {
-  const { isDark } = useTheme();
 
   return (
     <header
-      className={`w-full px-6 py-4 flex items-center justify-between shadow ${
-        isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-      }`}
+      className="w-full px-6 py-4 flex items-center justify-between shadow-theme bg-card text-primary"
     >
       <div className="text-xl font-bold">{title}</div>
 
