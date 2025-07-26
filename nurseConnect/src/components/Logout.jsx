@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/userContext';
 
 const Logout = () => {
-  const { logout } = useContext(UserContext);
   const navigate = useNavigate();
-
+ const { logout } = useUser();
   const handleLogout = () => {
     logout();
     navigate('/login');
