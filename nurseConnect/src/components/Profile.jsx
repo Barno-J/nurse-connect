@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FaMoon, FaSun, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import { useTheme } from '../contexts/ThemeContext';
 import Button from './ui/Button';
+import { useTheme } from '../contexts/ThemeContext';
+
 
 const Profile = ({ name = 'John Doe', onLogout, onSettings }) => {
   const { isDark, setIsDark } = useTheme();
@@ -20,11 +21,7 @@ const Profile = ({ name = 'John Doe', onLogout, onSettings }) => {
       {/* Avatar Button */}
       <Button
         onClick={toggleDropdown}
-        className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm shadow ${
-          isDark
-            ? 'bg-gray-700 text-white hover:bg-gray-600'
-            : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-        }`}
+        className="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm shadow-theme bg-secondary text-primary hover:bg-accent"
       >
         {initials}
       </Button>
@@ -32,27 +29,25 @@ const Profile = ({ name = 'John Doe', onLogout, onSettings }) => {
       {/* Dropdown */}
       {openDropdown && (
         <div
-          className={`absolute right-0 mt-2 w-48 rounded-lg shadow-lg py-2 z-50 ${
-            isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-          }`}
+          className="absolute right-0 mt-2 w-48 rounded-lg shadow-theme py-2 z-50 bg-card text-primary"
         >
           <Button
             onClick={() => {
-              setIsDark(!isDark);
+              setIsDark(!isDark); // still used for logic/display
               closeDropdown();
             }}
-            className="flex items-center w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex items-center w-full px-4 py-2 hover:bg-secondary-hover"
           >
             {isDark ? (
-              <FaSun className="mr-2 text-yellow-400" />
+              <FaSun className="mr-2 icon-accent" />
             ) : (
-              <FaMoon className="mr-2 text-gray-600" />
+              <FaMoon className="mr-2 icon-dark" />
             )}
             {isDark ? 'Light Mode' : 'Dark Mode'}
           </Button>
 
           <Button
-			type="button"
+            type="button"
             onClick={() => {
               onSettings?.();
               closeDropdown();
@@ -64,7 +59,7 @@ const Profile = ({ name = 'John Doe', onLogout, onSettings }) => {
           </Button>
 
           <Button
-			type="button"
+            type="button"
             onClick={() => {
               onLogout?.();
               closeDropdown();
