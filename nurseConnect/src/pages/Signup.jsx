@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import Form from '../components/ui/Form';
-import { useTheme } from '../contexts/ThemeContext';
 
 const Signup = () => {
-  const { isDark } = useTheme();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -58,12 +56,12 @@ const Signup = () => {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center px-4 ${isDark ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+    <div className="min-h-screen flex items-center justify-center px-4 bg-primary text-primary">
       <Form
         onSubmit={handleSubmit}
-        className={`w-full max-w-md p-8 rounded-2xl shadow-md ${isDark ? 'bg-gray-800' : 'bg-white'}`}
+        className="w-full max-w-md p-8 rounded-2xl shadow-theme bg-card"
       >
-        <h2 className={`text-2xl font-bold mb-6 text-center ${isDark ? 'text-white' : 'text-gray-800'}`}>
+        <h2 className="text-2xl font-bold mb-6 text-center text-primary">
           Create an Account
         </h2>
 
@@ -86,7 +84,7 @@ const Signup = () => {
           </Button>
         </div>
 
-        <p className={`text-center text-sm mt-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+        <p className="text-center text-sm mt-4 text-accent">
           Already have an account?{' '}
           <a href="/login" className="text-blue-600 hover:underline">
             Log In
