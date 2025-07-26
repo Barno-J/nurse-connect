@@ -25,9 +25,7 @@ const Sidebar = ({ userType = 'nurse', onClose }) => {
 
   return (
     <aside
-      className={`w-64 h-full p-6 transform transition-transform duration-300 ease-in-out ${
-        isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-      } shadow-lg`}
+      className={`w-64 h-full p-6 transform transition-transform duration-300 ease-in-out bg-card text-primary shadow-theme`}
     >
       <h2 className="text-lg font-bold mb-6 capitalize">{userType} Menu</h2>
       <ul className="space-y-4">
@@ -35,9 +33,7 @@ const Sidebar = ({ userType = 'nurse', onClose }) => {
           <li key={item.href}>
             <a
               href={item.href}
-              className={`block hover:underline ${
-                isDark ? 'text-gray-200' : 'text-gray-800'
-              }`}
+              className="block hover:underline text-primary"
             >
               {item.label}
             </a>
@@ -46,7 +42,7 @@ const Sidebar = ({ userType = 'nurse', onClose }) => {
       </ul>
 
       <Button
-		type="button"
+        type="button"
         onClick={onClose}
         className="mt-8 w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
       >
