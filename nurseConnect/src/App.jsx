@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import JobDescription from './components/JobDescription';
 import Loading from './components/Loading'; 
 
 // Lazily load major components
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
+const JobDescription = lazy(() => import('./components/JobDescription'));
 const Homepage = lazy(() => import('./pages/Homepage'));
 
 function App() {
