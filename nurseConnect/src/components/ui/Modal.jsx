@@ -6,7 +6,8 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 overflow-y-auto">
       <div
         className="w-full max-w-md mx-4 p-6 rounded-xl shadow-theme relative transition-all bg-card text-primary"
       >
@@ -14,7 +15,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         <Button
           type="button"
           onClick={onClose}
-          className="absolute top-2 right-3 text-lg font-bold hover:text-red-500"
+          className="absolute top-2 right-3 text-lg font-bold text-red-500 hover:text-red-300"
         >
           &times;
         </Button>
@@ -26,6 +27,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         <div>{children}</div>
       </div>
     </div>
+  </>
   );
 };
 
