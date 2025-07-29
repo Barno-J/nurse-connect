@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import Form from '../components/ui/Form';
+import { useToast } from '../contexts/ToastContext';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../redux/actions/userActions';
 
 const Signup = () => {
+  const { addToast } = useToast();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -50,9 +55,15 @@ const Signup = () => {
       alert('Passwords do not match!');
       return;
     }
-
-    console.log('Signup Submitted:', formData);
-    // Add signup logic (e.g., API call) here
+    dispatch(registerUser(formData))
+      .unwrap()
+      .then(() => {
+        addToast('Registration successful!', 'success');
+        // Optionally redirect to login or dashboard
+      })
+      .catch((error) => {
+        addToast(error, 'error');
+      });
   };
 
   return (
