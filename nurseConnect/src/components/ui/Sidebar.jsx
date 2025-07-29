@@ -1,12 +1,21 @@
 import React from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
-import Button from './Button';
+import {
+  FiHome,
+  FiCalendar,
+  FiDollarSign,
+  FiClipboard,
+  FiMessageSquare,
+  FiHelpCircle
+} from 'react-icons/fi';
 
 const navItems = {
   nurse: [
-    { label: 'Dashboard', href: '/nurse/dashboard' },
-    { label: 'My Shifts', href: '/nurse/shifts' },
-    { label: 'Profile', href: '/nurse/profile' },
+    { label: 'Dashboard', href: '/nurse/dashboard', icon: FiHome },
+    { label: 'My Shifts', href: '/nurse/shifts', icon: FiCalendar },
+    { label: 'Earnings', href: '/nurse/earnings', icon: FiDollarSign },
+    { label: 'Compliance', href: '/nurse/compliance', icon: FiClipboard },
+    { label: 'Messages', href: '/nurse/messages', icon: FiMessageSquare },
+    { label: 'Support', href: '/nurse/support', icon: FiHelpCircle },
   ],
   hospital: [
     { label: 'Dashboard', href: '/hospital/dashboard' },
@@ -20,34 +29,26 @@ const navItems = {
 };
 
 const Sidebar = ({ userType = 'nurse', onClose }) => {
-  const { isDark } = useTheme();
   const links = navItems[userType] || [];
 
   return (
-    <aside
-      className={`w-64 h-full p-6 transform transition-transform duration-300 ease-in-out bg-card text-primary shadow-theme`}
-    >
+    <aside className="w-64 h-full p-6 bg-card text-primary shadow-theme relative overflow-y-auto">
       <h2 className="text-lg font-bold mb-6 capitalize">{userType} Menu</h2>
       <ul className="space-y-4">
-        {links.map((item) => (
-          <li key={item.href}>
-            <a
-              href={item.href}
-              className="block hover:underline text-primary"
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {links.map((item) => {
+          const Icon = item.icon;
+          return (
+            <li key={item.href} className="mb-6">
+              <a href={item.href}
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-primary"
+              >
+                {Icon && <Icon className="text-xl" />}
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
-
-      <Button
-        type="button"
-        onClick={onClose}
-        className="mt-8 w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-      >
-        Close
-      </Button>
     </aside>
   );
 };
