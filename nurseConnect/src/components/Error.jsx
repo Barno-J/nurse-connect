@@ -6,13 +6,13 @@ const Error = ({
 	message = 'Something went wrong.',
 	onRetry = null,
 	fullScreen = false,
-	iconSize = '5xl'
+	iconSize = '5xl',
 }) => {
 	return (
 		<div
-			className={`${fullScreen ?
-					'fixed inset-0 z-50 flex items-center justify-center bg-card/90 backdrop-blur-sm' :
-					'py-6'
+			className={`w-full min-h-screen flex items-center justify-center px-4 ${fullScreen
+				? 'fixed inset-0 z-50 bg-card/90 backdrop-blur-sm'
+				: ''
 				}`}
 		>
 			<div className="flex flex-col items-center gap-4 text-center max-w-xs px-4">
