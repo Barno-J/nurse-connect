@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import Input from '../components/ui/Input';
@@ -9,7 +10,8 @@ import { loginUser } from '../redux/actions/userActions';
 import { useToast } from '../contexts/ToastContext';
 
 const Login = () => {
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { addToast } = useToast();
   const { loading, error, user } = useSelector((state) => state.user);
   const [credentials, setCredentials] = useState({
@@ -23,8 +25,7 @@ const Login = () => {
       addToast(error, 'error');
     } else if (user && !loading) {
       addToast('Login successful!', 'success');
-
-      // navigate('/dashboard');
+      navigate('/dashboard');
     }
   }, [user, error, loading, addToast]);
 
