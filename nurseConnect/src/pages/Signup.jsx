@@ -9,42 +9,72 @@ import { registerUser } from '../redux/actions/userActions';
 const Signup = () => {
   const { addToast } = useToast();
   const dispatch = useDispatch();
+
+  // Predefined admin permissions
+  const ALL_PERMISSIONS = ['manageUsers', 'viewReports', 'editSettings'];
+
   const [formData, setFormData] = useState({
+    role: 'USER',
     fullName: '',
     email: '',
+    nationalId: '',
     password: '',
     confirmPassword: '',
+    phone: '',
+    address: '',
+    // USER-specific
+    specialization: '',
+    yearOfExperience: '',
+    sex: '',
+    age: '',
+    location: '',
+    // ADMIN-specific
+    permissions: ALL_PERMISSIONS.reduce((acc, perm) => ({ ...acc, [perm]: false }), {}),
   });
-  const inputs = [
-    {
-      label: 'Full Name',
-      name: 'fullName',
-      type: 'text',
-      placeholder: 'Jane Doe',
-    },
-    {
-      label: 'Email',
-      name: 'email',
-      type: 'email',
-      placeholder: 'you@example.com',
-    },
-    {
-      label: 'Password',
-      name: 'password',
-      type: 'password',
-      placeholder: '********',
-    },
-    {
-      label: 'Confirm Password',
-      name: 'confirmPassword',
-      type: 'password',
-      placeholder: '********',
-    },
-  ];
+
   const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleRoleChange = (e) => {
+    const role = e.target.value;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      role,
+      // Reset fields when switching roles
+      permissions: role === 'ADMIN' ? prev.permissions : {},
+      specialization: role === 'USER' ? prev.specialization : '',
+      yearOfExperience: role === 'USER' ? prev.yearOfExperience : '',
+      sex: role === 'USER' ? prev.sex : '',
+      age: role === 'USER' ? prev.age : '',
+      location: role === 'USER' ? prev.location : '',
+    }));
+  };
+
+  const commonFields = [
+    { label: 'Full Name', name: 'fullName', type: 'text', placeholder: 'Jane Doe' },
+    { label: 'Email', name: 'email', type: 'email', placeholder: 'you@example.com' },
+    { label: 'National ID', name: 'nationalId', type: 'text', placeholder: '12345678901234' },
+    { label: 'Phone', name: 'phone', type: 'text', placeholder: '1234567890' },
+    { label: 'Password', name: 'password', type: 'password', placeholder: '********' },
+    { label: 'Confirm Password', name: 'confirmPassword', type: 'password', placeholder: '********' },
+  ];
+
+  const userFields = [
+    { label: 'Specialization', name: 'specialization', type: 'text' },
+    { label: 'Years of Experience', name: 'yearOfExperience', type: 'number' },
+    { label: 'Sex', name: 'sex', type: 'text' },
+    { label: 'Age', name: 'age', type: 'number' },
+    { label: 'Location', name: 'location', type: 'text' },
+  ];
+
+  const handlePermissionChange = (perm, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      permissions: {
+        ...prev.permissions,
+        [perm]: value,
+      },
     }));
   };
 
@@ -52,57 +82,81 @@ const Signup = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
+      addToast('Passwords do not match!', 'error');
       return;
     }
-    dispatch(registerUser(formData))
+
+    const payload = {
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+      role: formData.role,
+      nationalId: formData.nationalId,
+      phone: formData.phone || null,
+      address: formData.address || "Not available",
+      ...(formData.role === 'USER' && {
+        specialization: formData.specialization,
+        yearOfExperience: Number(formData.yearOfExperience),
+        sex: formData.sex,
+        age: Number(formData.age),
+        location: formData.location,
+      }),
+      ...(formData.role === 'ADMIN' && {
+        permissions: Object.keys(formData.permissions).filter((key) => formData.permissions[key]),
+      }),
+    };
+
+    dispatch(registerUser(payload))
       .unwrap()
-      .then(() => {
-        addToast('Registration successful!', 'success');
-        // Optionally redirect to login or dashboard
-      })
-      .catch((error) => {
-        addToast(error, 'error');
-      });
+      .then(() => addToast('Registration successful!', 'success'))
+      .catch((error) => addToast(error, 'error'));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-primary text-primary">
-      <Form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md p-8 rounded-2xl shadow-theme bg-card"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center text-primary">
-          Create an Account
-        </h2>
+    <Form onSubmit={handleSubmit}>
+      <select name="role" value={formData.role} onChange={handleRoleChange}>
+        <option value="USER">User</option>
+        <option value="ADMIN">Admin</option>
+      </select>
 
-        {inputs.map((input) => (
+      {/* Render common fields */}
+      {commonFields.map((field) => (
+        <Input
+          key={field.name}
+          {...field}
+          value={formData[field.name]}
+          onChange={handleChange}
+          required
+        />
+      ))}
+
+      {/* USER fields */}
+      {formData.role === 'USER' &&
+        userFields.map((field) => (
           <Input
-            key={input.name}
-            label={input.label}
-            name={input.name}
-            type={input.type}
-            placeholder={input.placeholder}
-            value={formData[input.name]}
+            key={field.name}
+            {...field}
+            value={formData[field.name]}
             onChange={handleChange}
             required
           />
         ))}
 
-        <div className="mt-6">
-          <Button type="submit" fullWidth>
-            Sign Up
-          </Button>
-        </div>
+      {/* ADMIN permissions */}
+      {formData.role === 'ADMIN' &&
+        ALL_PERMISSIONS.map((perm) => (
+          <label key={perm} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={formData.permissions[perm]}
+              onChange={(e) => handlePermissionChange(perm, e.target.checked)}
+            />
+            {perm}
+          </label>
+        ))}
 
-        <p className="text-center text-sm mt-4 text-accent">
-          Already have an account?{' '}
-          <a href="/login" className="text-blue-600 hover:underline">
-            Log In
-          </a>
-        </p>
-      </Form>
-    </div>
+      <Button type="submit">Sign Up</Button>
+    </Form>
   );
 };
 
