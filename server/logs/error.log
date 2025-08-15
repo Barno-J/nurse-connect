@@ -1,0 +1,14 @@
+[2025-08-14 13:42:37] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:42:46] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:44:41] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:45:10] error: POST /api/users/register - "nationalId" length must be 14 characters long
+[2025-08-14 13:45:59] error: POST /api/users/register - "nationalId" length must be 6 characters long
+[2025-08-14 13:46:17] error: POST /api/users/register - "address" must be a string
+[2025-08-14 13:47:26] error: POST /api/users/register - "sex" must be one of [male, female]
+[2025-08-14 13:49:37] error: POST /api/users/login - "fullName" is required
+[2025-08-14 13:54:09] error: POST /api/users/login - "password" length must be at least 6 characters long
+[2025-08-14 13:54:16] error: POST /api/users/login - Invalid password
+[2025-08-14 13:55:34] error: POST /api/users/login - Unauthorized access
+[2025-08-14 13:56:02] error: POST /api/users/login - Invalid password
+[2025-08-14 13:56:22] error: POST /api/users/login - Invalid email
+[2025-08-14 14:10:53] error: POST /api/users/login - Invalid password

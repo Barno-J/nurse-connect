@@ -1,0 +1,38 @@
+[2025-08-14 13:36:42] info: POST /api/user/register
+[2025-08-14 13:38:31] info: POST /api/user/register
+[2025-08-14 13:39:54] info: POST /api/user/register
+[2025-08-14 13:40:22] info: POST /api/user/register
+[2025-08-14 13:42:37] info: POST /api/users/register
+[2025-08-14 13:42:37] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:42:46] info: POST /api/users/register
+[2025-08-14 13:42:46] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:44:41] info: POST /api/users/register
+[2025-08-14 13:44:41] error: POST /api/users/register - "nationalId" is required
+[2025-08-14 13:45:10] info: POST /api/users/register
+[2025-08-14 13:45:10] error: POST /api/users/register - "nationalId" length must be 14 characters long
+[2025-08-14 13:45:59] info: POST /api/users/register
+[2025-08-14 13:45:59] error: POST /api/users/register - "nationalId" length must be 6 characters long
+[2025-08-14 13:46:17] info: POST /api/users/register
+[2025-08-14 13:46:17] error: POST /api/users/register - "address" must be a string
+[2025-08-14 13:47:26] info: POST /api/users/register
+[2025-08-14 13:47:26] error: POST /api/users/register - "sex" must be one of [male, female]
+[2025-08-14 13:47:39] info: POST /api/users/register
+[2025-08-14 13:49:37] info: POST /api/users/login
+[2025-08-14 13:49:37] error: POST /api/users/login - "fullName" is required
+[2025-08-14 13:52:54] info: POST /api/users/login
+[2025-08-14 13:53:22] info: POST /api/users/login
+[2025-08-14 13:54:09] info: POST /api/users/login
+[2025-08-14 13:54:09] error: POST /api/users/login - "password" length must be at least 6 characters long
+[2025-08-14 13:54:15] info: POST /api/users/login
+[2025-08-14 13:54:16] error: POST /api/users/login - Invalid password
+[2025-08-14 13:55:34] info: POST /api/users/login
+[2025-08-14 13:55:34] error: POST /api/users/login - Unauthorized access
+[2025-08-14 13:56:02] info: POST /api/users/login
+[2025-08-14 13:56:02] error: POST /api/users/login - Invalid password
+[2025-08-14 13:56:22] info: POST /api/users/login
+[2025-08-14 13:56:22] error: POST /api/users/login - Invalid email
+[2025-08-14 14:10:53] info: POST /api/users/login
+[2025-08-14 14:10:53] error: POST /api/users/login - Invalid password
+[2025-08-14 14:10:58] info: POST /api/users/login
+[2025-08-14 14:11:35] info: POST /api/users/login
+[2025-08-14 14:12:32] info: POST /api/users/login
