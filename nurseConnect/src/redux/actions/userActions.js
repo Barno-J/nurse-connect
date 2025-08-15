@@ -5,7 +5,7 @@ export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await apiClient.post('/user/login', credentials);
+      const res = await apiClient.post('/users/login', credentials);
       const { user, token } = res.data;
 
       // Persist
@@ -23,7 +23,7 @@ export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await apiClient.post('/user/register', userData);
+      const res = await apiClient.post('/users/register', userData);
       const { user, token } = res.data;
 
       // Persist
